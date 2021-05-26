@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+}
+
+version = '1.0.0'
+group = 'dev.array21'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }   
+}
+
+dependencies {
+    compileOnly 'com.github.Netherlandschat:Core:0.0.8.1'
+    compileOnly ('net.dv8tion:JDA:4.2.0_228') {
+        exclude module: 'opus-java'
+    }   
+}
+
+task dockerBuild(type: Jar) {
+	description 'Task used for Docker builds'
+	version = ''
+	archiveClassifier = ''
+	archiveBaseName = 'DickMeasuringContest'
+	
+	from sourceSets.main.output
+}
+
+
+task ghActions(type: Jar) {	
+	description 'GitHub Actions Task. Do not use in regular development!'
+	version = ''
+	archiveClassifier = ''
+	archiveBaseName = 'output'
+	
+	from sourceSets.main.output
+	
+	destinationDirectory = file("$rootDir/actions")
+}
