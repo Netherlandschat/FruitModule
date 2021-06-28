@@ -1,4 +1,4 @@
-package dev.array21.avocadomodule;
+package dev.array21.fruitmodule;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
