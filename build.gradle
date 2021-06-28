@@ -3,8 +3,11 @@ plugins {
     id 'eclipse'
 }
 
-version = '1.0.0'
+version = '1.0.1'
 group = 'dev.array21'
+
+targetCompatibility = 11
+sourceCompatibility = 11
 
 repositories {
     mavenCentral()
