@@ -2,8 +2,6 @@ package dev.array21.fruitmodule;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import java.util.Map;
-import java.util.Iterator;
 
 public class MessageEventListener extends ListenerAdapter {
 
@@ -13,14 +11,10 @@ public class MessageEventListener extends ListenerAdapter {
 			return;
 		}
 		
-		Iterator it = FruitTypes.fruitMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-
-            if(message.toLowerCase().contains(pair.getKey().toString())) {
-                event.getMessage().addReaction(pair.getValue().toString()).queue();
-            }
-        }
-
+		for(Map.Entry<String, String> entry : FruitTypes.fruitMap.entrySet()) {
+			if(message.toLowerCase().contains(entry.getKey())) {
+                		event.getMessage().addReaction(entry.getValue()).queue();
+			}
+		}
 	}
 }
