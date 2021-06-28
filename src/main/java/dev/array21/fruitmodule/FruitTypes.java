@@ -1,10 +1,9 @@
 package dev.array21.fruitmodule;
 
 import java.util.HashMap;
-import java.util.Map;
 
-public class FruitTypes extends FruitModule {
-        public static Map<String,String> fruitMap = new HashMap<>();
+public class FruitTypes {
+        public static HashMap<String,String> fruitMap = new HashMap<>();
         static {
 
             fruitMap.put("banaan", "U+1F34C");
