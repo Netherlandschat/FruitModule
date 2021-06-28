@@ -10,7 +10,7 @@ public class FruitTypes {
             fruitMap.put("bananen", "U+1F34C");
             fruitMap.put("banana", "U+1F34C");
 
-            fruitMap.put("appel", "U+1F34C");
+            fruitMap.put("appel", "U+1F34E");
             fruitMap.put("apple", "U+1F34E");
 
             fruitMap.put("peer", "U+1F350");
@@ -28,8 +28,6 @@ public class FruitTypes {
             fruitMap.put("watermelon", "U+1F349");
 
             fruitMap.put("broccoli", "U+1F966");
-
-            fruitMap.put("mais", "U+1F966");
 
             fruitMap.put("avocado", "U+1F951");
 
