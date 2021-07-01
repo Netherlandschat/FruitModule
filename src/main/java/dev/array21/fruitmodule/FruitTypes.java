@@ -17,7 +17,7 @@ public class FruitTypes {
             FRUIT_MAP.put("pear", "U+1F350");
 
             FRUIT_MAP.put("aardbei", "U+1F353");
-            FRUIT_MAP.put("strawberr", "U+1F353");
+            FRUIT_MAP.put("strawberry", "U+1F353");
 
             FRUIT_MAP.put("sinaasappel", "U+1F34A");
             FRUIT_MAP.put("orange", "U+1F34A");
