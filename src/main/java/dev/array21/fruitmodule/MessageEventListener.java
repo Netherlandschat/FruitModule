@@ -2,7 +2,9 @@ package dev.array21.fruitmodule;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import java.util.Map;
+
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class MessageEventListener extends ListenerAdapter {
 
@@ -11,12 +13,15 @@ public class MessageEventListener extends ListenerAdapter {
 		if(event.getAuthor().isBot()) {
 			return;
 		}
-
+		
 		String message = event.getMessage().getContentDisplay();
-		for(Map.Entry<String, String> entry : FruitTypes.fruitMap.entrySet()) {
-			if(message.toLowerCase().contains(entry.getKey())) {
-                		event.getMessage().addReaction(entry.getValue()).queue();
-			}
-		}
+		Arrays.asList(message.split(Pattern.quote(" ")))
+			.stream()
+			.forEach(word -> {
+				String unicode = FruitTypes.FRUIT_MAP.get(word);
+				if(unicode != null) {
+					event.getMessage().addReaction(unicode).queue();
+				}
+			});
 	}
 }
