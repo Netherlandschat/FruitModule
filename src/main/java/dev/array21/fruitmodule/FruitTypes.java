@@ -61,7 +61,7 @@ public class FruitTypes {
             fruitMap.put("cheese", "U+1F9C0");
 
             fruitMap.put(" thee", "U+1F375");
-            fruitMap.put(" tea", "U+1F375");
+            fruitMap.put(" tea ", "U+1F375");
 
             fruitMap.put(" koffie", "U+2615");
             fruitMap.put(" coffee", "U+2615");
