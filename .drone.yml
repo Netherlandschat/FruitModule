@@ -1,0 +1,66 @@
+kind: pipeline
+type: kubernetes
+name: build-latest
+
+trigger:
+  branch:
+  - master
+
+steps:
+- name: Compile
+  image: gradle:7.2-jdk16
+  commands:
+  - 'chmod +x gradlew'
+  - './gradlew build'
+
+- name: Deploy to Kubernetes
+  image: ubuntu:latest
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    SSH_KEY:
+      from_secret: ssh_key
+  commands:
+  - apt update && apt install -y openssh-client
+  
+  - mkdir -p $HOME/.ssh/
+  - eval `ssh-agent`
+  - echo "$SSH_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+  - rm -rf $HOME/.ssh/config
+  - touch $HOME/.ssh/config
+  - echo "Host *\n\tStrictHostKeyChecking no" > $HOME/.ssh/config
+  
+  - "ssh droneci@kube-ssh.intern.array21.dev kubectl rollout restart deploy -n prodlab netherlandsbot"
+
+- name: Slack notifications
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: discord_webhook
+    username: Drone CI/CD - NetherlandsBot FruitModule - build-latest
+  when:
+    status: [ failure ]
+---
+kind: pipeline
+type: kubernetes
+name: build-latest
+
+trigger:
+  event:
+  - pull_request
+
+steps:
+- name: Compile
+  image: gradle:7.2-jdk16
+  commands:
+  - 'chmod +x gradlew'
+  - './gradlew build'
+
+- name: Slack notifications
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: discord_webhook
+    username: Drone CI/CD - NetherlandsBot FruitModule - pull_request
+  when:
+    status: [ failure ]
